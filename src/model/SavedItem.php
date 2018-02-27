@@ -7,6 +7,7 @@ class SavedItem {
     protected $url;
     protected $image;
     protected $title;
+    protected $isRead;
     protected $dateCreated;
     protected $dateModified;
 
@@ -42,6 +43,14 @@ class SavedItem {
         $this->title = $title;
     }
 
+    public function getIsRead() {
+        return $this->isRead;
+    }
+
+    public function setIsRead($isRead) {
+        $this->isRead = $isRead;
+    }
+
     public function getDateCreated() {
         return $this->dateCreated;
     }
@@ -55,6 +64,6 @@ class SavedItem {
     }
 
     public function setDateModified($dateModified) {
-        $this->dateModified = $dateCreated;
+        $this->dateModified = $dateModified;
     }
 }
