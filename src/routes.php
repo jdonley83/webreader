@@ -1,11 +1,12 @@
 <?php
 
-require_once('model/SavedItem.php');
+namespace WebReader;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
 
 use WebReader\Model\SavedItem as SavedItem;
+use WebReader\Data\SavedItemRepo as SavedItemRepo;
 
 // Routes
 
@@ -45,7 +46,7 @@ $app->get('/api/saved-items/all', function (Request $request, Response $response
 });
 
 $app->post('/api/saved-items', function (Request $request, Response $response, array $args) {
-    $savedItem = new SavedItem;
+    $savedItem = new SavedItem();
     $savedItem->setUrl($request->getParsedBodyParam('url', 'http://google.com'));
     $savedItem->setImage($request->getParsedBodyParam('image', ''));
     $savedItem->setTitle($request->getParsedBodyParam('title', ''));
@@ -53,7 +54,10 @@ $app->post('/api/saved-items', function (Request $request, Response $response, a
     $savedItem->setDateCreated(date('Y-m-d H:i:s'));
     $savedItem->setDateModified(date('Y-m-d H:i:s'));
 
-    $dog = "dog";
+    $savedItemRepo = new SavedItemRepo();
+    $savedItem = $savedItemRepo->insertSavedItem($savedItem);
+
+    return $response->withJson($savedItem->convertToArray());
 });
 
 $app->get('/api[/{test}]', function (Request $request, Response $response, array $args) {

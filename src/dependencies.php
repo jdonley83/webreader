@@ -1,4 +1,9 @@
 <?php
+
+namespace WebReader;
+
+use \RedBeanPHP\R as R;
+
 // DIC configuration
 
 $container = $app->getContainer();
@@ -17,3 +22,6 @@ $container['logger'] = function ($c) {
     $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
     return $logger;
 };
+
+// setup database
+R::setup('mysql:host=localhost;dbname=webreader', 'root', '');

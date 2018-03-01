@@ -66,4 +66,18 @@ class SavedItem {
     public function setDateModified($dateModified) {
         $this->dateModified = $dateModified;
     }
+
+    public function convertToArray() {
+        $data = array();
+
+        $data['id'] = $this->id;
+        $data['url'] = $this->url;
+        $data['image'] = $this->image;
+        $data['title'] = $this->title;
+        $data['isRead'] = $this->isRead;
+        $data['dateCreated'] = $this->dateCreated;
+        $data['dateModified'] = $this->dateModified;
+
+        return $data;
+    }
 }
