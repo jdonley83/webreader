@@ -2,25 +2,21 @@
 
 namespace Tests\Unit\Model;
 
-use WebReader\SavedItem as SavedItem;
+use WebReader\Model\SavedItem;
 
 class SavedItemTests extends \PHPUnit_Framework_TestCase
 {
-    private $currentDate;
-
-    protected function setUp() {
-        $currentDate = date('Y-m-d H:i:s');
-    }
-
     public function testConvertToArrayReturnsData() {
+        $currentDate = date('Y-m-d H:i:s');
+
         $savedItem = new SavedItem();
         $savedItem->setId(1);
         $savedItem->setUrl('url');
         $savedItem->setTitle('title');
         $savedItem->setImage('image');
         $savedItem->setIsRead(true);
-        $savedItem->setDateCreated($this->$currentDate);
-        $savedItem->setDateModified($this->$currentDate);
+        $savedItem->setDateCreated($currentDate);
+        $savedItem->setDateModified($currentDate);
 
         $result = $savedItem->convertToArray();
 
@@ -29,7 +25,7 @@ class SavedItemTests extends \PHPUnit_Framework_TestCase
         $this->assertEquals('title', $result['title']);
         $this->assertEquals('image', $result['image']);
         $this->assertEquals(true, $result['isRead']);
-        $this->assertEquals($this->$currentDate, $result['dateCreated']);
-        $this->assertEquals($this->$currentDate, $result['dateModified']);
+        $this->assertEquals($currentDate, $result['dateCreated']);
+        $this->assertEquals($currentDate, $result['dateModified']);
     }
 }

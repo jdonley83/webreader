@@ -1,14 +1,14 @@
 {
-    "name": "slim/slim-skeleton",
-    "description": "A Slim Framework skeleton application for rapid development",
-    "keywords": ["microframework", "rest", "router", "psr7"],
-    "homepage": "http://github.com/slimphp/Slim-Skeleton",
+    "name": "WebReader",
+    "description": "A place to read all of you rss feeds and other saved content.",
+    "keywords": ["rss", "feed-reader", "api", "react", "php", "slim"],
+    "homepage": "https://github.com/jdonley83/webreader",
     "license": "MIT",
     "authors": [
         {
-            "name": "Josh Lockhart",
-            "email": "info@joshlockhart.com",
-            "homepage": "http://www.joshlockhart.com/"
+            "name": "Joe Donley",
+            "email": "jdonley83@gmail.com",
+            "homepage": "http://jwdonley.com/"
         }
     ],
     "require": {
@@ -23,8 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "WebReader\\Model\\": "src/model",
-            "WebReader\\Data\\": "src/data"
+            "WebReader\\": "src/"
         }
     },
     "autoload-dev": {
@@ -37,7 +36,7 @@
     },
     "scripts": {
         "start": "php -S localhost:8080 -t public index.php",
-        "test": "phpunit --verbose"
+        "test": "phpunit --bootstrap vendor/autoload.php tests"
     }
 
 }

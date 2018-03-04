@@ -2,6 +2,8 @@
 
 namespace Tests\Functional;
 
+use WebReader\Model\SavedItem as SavedItem;
+
 class HomepageTest extends BaseTestCase
 {
     /**
