@@ -36,7 +36,7 @@
     },
     "scripts": {
         "start": "php -S localhost:8080 -t public index.php",
-        "test": "phpunit --bootstrap vendor/autoload.php tests"
+        "test": "phpunit --verbose"
     }
 
 }

@@ -4,7 +4,7 @@ namespace Tests\Unit\Model;
 
 use WebReader\Model\SavedItem;
 
-class SavedItemTests extends \PHPUnit_Framework_TestCase
+class SavedItemTest extends \PHPUnit_Framework_TestCase
 {
     public function testConvertToArrayReturnsData() {
         $currentDate = date('Y-m-d H:i:s');
