@@ -15,7 +15,15 @@ session_start();
 
 // Instantiate the app
 $settings = require __DIR__ . '/../src/settings.php';
-$app = new \Slim\App($settings);
+$container = new \Slim\Container($settings);
+
+// Register repos
+$container['savedItemRepo'] = function ($container) {
+    $savedItemRepo = new \WebReader\Data\SavedItemRepo();
+    return $savedItemRepo;
+};
+
+$app = new \Slim\App($container);
 
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';

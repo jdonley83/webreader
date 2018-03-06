@@ -19,30 +19,9 @@ $app->get('/', function (Request $request, Response $response, array $args) {
 });
 
 $app->get('/api/saved-items/all', function (Request $request, Response $response, array $args) {
-    $data = array();
+    $repo = $this->savedItemRepo;
 
-    $savedItem1 = array();
-    $savedItem1['id'] = 1;
-    $savedItem1['url'] = 'url';
-    $savedItem1['image'] = 'image';
-    $savedItem1['title'] = 'title';
-    $savedItem1['isRead'] = false;
-    $savedItem1['dateCreated'] = date('Y-m-d H:i:s');
-    $savedItem1['dateModified'] = date('Y-m-d H:i:s');
-
-    $savedItem2 = array();
-    $savedItem2['id'] = 1;
-    $savedItem2['url'] = 'url';
-    $savedItem2['image'] = 'image';
-    $savedItem2['title'] = 'title';
-    $savedItem2['isRead'] = true;
-    $savedItem2['dateCreated'] = date('Y-m-d H:i:s');
-    $savedItem2['dateModified'] = date('Y-m-d H:i:s');
-
-    $data[] = $savedItem1;
-    $data[] = $savedItem2;
-
-    return $response->withJson($data);
+    return $response->withJson($repo->getAll());
 });
 
 $app->post('/api/saved-items', function (Request $request, Response $response, array $args) {
@@ -55,7 +34,7 @@ $app->post('/api/saved-items', function (Request $request, Response $response, a
     $savedItem->setDateModified(date('Y-m-d H:i:s'));
 
     $savedItemRepo = new SavedItemRepo();
-    $savedItem = $savedItemRepo->insertSavedItem($savedItem);
+    $savedItem = $savedItemRepo->insert($savedItem);
 
     return $response->withJson($savedItem->convertToArray());
 });

@@ -3,6 +3,7 @@
 namespace Tests\Functional;
 
 use Slim\App;
+use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\Environment;
@@ -21,6 +22,9 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
      * @var bool
      */
     protected $withMiddleware = true;
+
+    protected $app;
+    protected $container;
 
     /**
      * Process the application given a request method and URI
@@ -54,8 +58,11 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
         // Use the application settings
         $settings = require __DIR__ . '/../../src/settings.php';
 
+        // Set up the container
+        $this->container = new Container($settings);
+
         // Instantiate the application
-        $app = new App($settings);
+        $this->app = new App($this->container);
 
         // Set up dependencies
         require __DIR__ . '/../../src/dependencies.php';
@@ -69,7 +76,7 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
         require __DIR__ . '/../../src/routes.php';
 
         // Process the application
-        $response = $app->process($request, $response);
+        $response = $this->app->process($request, $response);
 
         // Return the response
         return $response;
